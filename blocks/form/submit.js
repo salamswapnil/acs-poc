@@ -78,7 +78,8 @@ async function prepareRequest(form) {
   const headers = {
     'Content-Type': 'application/json',
     // eslint-disable-next-line comma-dangle
-    'x-adobe-form-hostname': window?.location?.hostname
+    'x-adobe-form-hostname': window?.location?.hostname,
+    'Authorization': `Bearer ya29.a0ARGnu0ZjD_lqRqlM9gZTNRzw3uJ6J3zspF_xDao6HX3_mxfhPwIUD6Zkrm4MOfp-9BRiiVzIXOi7hS5TCPaaBoygfHoTEUXiLv2eiEA3m_-4PrqarMGH_VvfInIhr_xIqDTQilBb5KfHcT7Gr5Pcm1PizTL-Vtq45FCEwgwPUZUkDUoX2nOYVqzmfK4IjBhP6DA_JOoaCgYKAQYSARMSFQHGX2MiAswTX4820T47S7xfR7Xzpg0206`,
   };
   const body = { data: payload };
   let url;
