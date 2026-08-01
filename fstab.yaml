@@ -1,5 +1,9 @@
 mountpoints:
+<<<<<<< HEAD
   /:
     url: "https://author-p130360-e1272151.adobeaemcloud.com/bin/franklin.delivery/adobe-rnd/aem-boilerplate-xwalk/main"
     type: "markup"
     suffix: ".html"
+=======
+  /: https://drive.google.com/drive/u/1/folders/1el5mVr5_UtrCZl_hdeY1gD9VmFY-wAFE
+>>>>>>> 00c1cef (chore: update @playwright/test dependency to version 1.60.0)
