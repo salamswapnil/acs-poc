@@ -4,7 +4,11 @@
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
+<<<<<<< HEAD
   gap: 24px;
+=======
+  grid-gap: 24px;
+>>>>>>> 5f8f588 (Initial commit)
 }
 
 .cards > ul > li {
