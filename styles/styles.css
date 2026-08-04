@@ -13,6 +13,7 @@
 :root {
   /* colors */
   --background-color: white;
+  --body-background-color: #007481;
   --light-color: #f8f8f8;
   --dark-color: #505050;
   --text-color: #131313;
@@ -73,7 +74,7 @@
 body {
   display: none;
   margin: 0;
-  background-color: var(--background-color);
+  background-color: var(--body-background-color);
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);

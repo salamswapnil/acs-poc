@@ -8,6 +8,7 @@
     --button-primary-color: #0073ea;
     --button-secondary-color: #676879;
     --button-primary-hover-color: #0060b9;
+    --border-radius-small: 4px;
     --form-font-size-m: 22px;
     --form-font-size-s: 16px;
     --form-font-size-xs: 14px;
@@ -17,7 +18,7 @@
     --form-field-horz-gap: 16px;
     --form-field-vert-gap: 12px;
     --form-invalid-border-color: #d83a52;
-    --form-input-padding: 10px 12px;
+    --form-input-padding: 8px 4px 8px 12px;
     --form-input-font-size: 14px;
     --form-input-disable-color: #ebebe4;
     --form-input-border-size: 1px;
@@ -53,6 +54,8 @@
     --form-upload-background-color: var(--background-color-primary);
     --form-submit-width: 100%;
     --form-width: 100%;
+    --form-shell-max-width: 640px;
+    --form-shell-max-height: calc(100vh - 110px);
     --form-field-gap: 5px;
     
     /* Card styling variables */
@@ -124,9 +127,17 @@ form:not(.edit-mode) [data-visible="false"] {
 }
 
 main .form-container {
-    background-color: var(--form-background-color);
-    padding: var(--form-padding);
     width: var(--form-width);
+    max-width: var(--form-shell-max-width);
+    margin: 0 auto;
+    background: white;
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgb(0 0 0 / 12%);
+    max-height: var(--form-shell-max-height);
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
 }
 
 main .form {
@@ -203,23 +214,26 @@ main .form select {
     max-width: unset;
     margin-top: 0.35rem;
     margin-bottom: 0.7rem;
-    border-radius: 8px;
+    border-radius: var(--border-radius-small);
     transition: border-color 120ms ease, box-shadow 120ms ease;
 }
 
-main .form input:hover, main .form select:hover {
-    border-color: #9799a6;
+main .form input:hover {
+    border-color: var(--button-primary-color);
+}
+
+main .form select:hover, main .form textarea:hover {
+    border-color: #323338;
 }
 
 main .form input:focus,
 main .form textarea:focus,
 main .form select:focus {
     border-color: var(--button-primary-color);
-    box-shadow: 0 0 0 3px rgb(229 0 115 / 14%);
     outline: none;
 }
 
-main .form input:disabled{
+main .form input:disabled {
     background-color: var(--form-input-disable-color);
 }
 
@@ -263,7 +277,6 @@ main .form fieldset:not(.checkbox-group-wrapper, .radio-group-wrapper) legend {
 main .form form .field-wrapper > label.field-label,
 main .form form fieldset.checkbox-group-wrapper > legend,
 main .form form fieldset.radio-group-wrapper > legend {
-    font-family: Poppins, Roboto, "Noto Sans Hebrew", "Noto Kufi Arabic", "Noto Sans JP", sans-serif;
     font-weight: var(--form-question-font-weight);
     font-size: var(--form-question-font-size);
     color: var(--form-label-color);
@@ -464,7 +477,7 @@ main .form button {
     border: var(--form-button-border);
     padding: var(--form-button-padding);
     font-size: var(--form-button-font-size);
-    border-radius: 8px;
+    border-radius: var(--border-radius-small);
     font-weight: 400;
     line-height: 1.2;
     min-height: 44px;
@@ -575,7 +588,7 @@ main .file-wrapper .file-description button {
     background: var(--border-color);
     cursor: pointer;
     position: relative;
-    border-radius: 3px;
+    border-radius: var(--border-radius-small);
 }
 
 main .file-wrapper .file-description button::after{
@@ -741,23 +754,22 @@ main .form form .checkbox-group-wrapper.horizontal .field-description {
     margin-top: 0.5rem;
 }
 
-main div.form-wrapper {
-    background: white;
-    padding: 28px;
-    border-radius: 16px;
-    box-shadow: 0 12px 30px rgb(0 0 0 / 12%);
+main div.form-wrapper, main div.form-container .default-content-wrapper {
+    padding: 0;
 }
 
 /* Responsive adjustments for mobile */
 @media (width <= 599px) {
     :root {
         --form-field-horz-gap: 10px;
+        --form-shell-max-width: 100%;
+        --form-shell-max-height: calc(100vh - 72px);
     }
 
-    main div.form-wrapper {
+    /* main div.form-wrapper {
         padding: 20px;
         border-radius: 12px;
-    }
+    } */
 }
 
 /* Expand height for multi-select dropdowns (array types) */
