@@ -1,13 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Noto+Kufi+Arabic:wght@300;400;500&amp;family=Noto+Sans+JP:wght@300;400;500;700&amp;family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&amp;family=Noto+Sans+Hebrew:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&amp;display=swap');
 
 :root {
     --background-color-primary: #fff;
     --label-color: #323338;
     --border-color: #c3c6d4;
     --form-error-color: #d83a52;
-    --button-primary-color: #e50073;
+    --button-primary-color: #0073ea;
     --button-secondary-color: #676879;
-    --button-primary-hover-color: #94054d;
+    --button-primary-hover-color: #0060b9;
     --form-font-size-m: 22px;
     --form-font-size-s: 16px;
     --form-font-size-xs: 14px;
@@ -30,6 +30,9 @@
     --form-label-color: var(--label-color);
     --form-label-font-size: var(--form-font-size-s);
     --form-label-font-weight: 500;
+    --form-question-font-size: 18px;
+    --form-question-font-weight: 600;
+    --form-question-line-height: 1.25;
     --form-title-font-weight: 600;
     --form-fieldset-border: 0;
     --form-fieldset-marign: 0;
@@ -44,7 +47,7 @@
     --form-button-background-color: var(--button-primary-color);
     --form-button-background-hover-color: var(--button-primary-hover-color);
     --form-button-border: 1px solid transparent;
-    --form-button-padding:12px 20px;
+    --form-button-padding:8px 16px;
     --form-upload-color: var(--form-label-color);
     --form-upload-font-size: var(--form-font-size-xs);
     --form-upload-background-color: var(--background-color-primary);
@@ -257,13 +260,14 @@ main .form fieldset:not(.checkbox-group-wrapper, .radio-group-wrapper) legend {
     margin-bottom: 10px;
 }
 
-main .form label,
-main .form fieldset.checkbox-group-wrapper legend,
-main .form fieldset.radio-group-wrapper legend {
-    font-weight: var(--form-label-font-weight);
-    font-size: var(--form-label-font-size);
+main .form form .field-wrapper > label.field-label,
+main .form form fieldset.checkbox-group-wrapper > legend,
+main .form form fieldset.radio-group-wrapper > legend {
+    font-family: Poppins, Roboto, "Noto Sans Hebrew", "Noto Kufi Arabic", "Noto Sans JP", sans-serif;
+    font-weight: var(--form-question-font-weight);
+    font-size: var(--form-question-font-size);
     color: var(--form-label-color);
-    line-height: 1.35;
+    line-height: var(--form-question-line-height);
 }
 
 main .form form fieldset.checkbox-group-wrapper,
@@ -314,6 +318,9 @@ main .form form fieldset > .checkbox-wrapper {
 main .form .radio-wrapper  label,
 main .form .checkbox-wrapper label {
     flex-basis: calc(100% - 24px);
+    font-size: var(--form-label-font-size);
+    font-weight: var(--form-label-font-weight);
+    line-height: 1.35;
 }
 
 main .form fieldset.link .checkbox-wrapper label {
@@ -458,9 +465,11 @@ main .form button {
     padding: var(--form-button-padding);
     font-size: var(--form-button-font-size);
     border-radius: 8px;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 1.2;
+    min-height: 44px;
     width: 100%;
+    transition: background-color 120ms ease, box-shadow 120ms ease;
 }
 
 main form .file-wrapper > button{
@@ -471,8 +480,24 @@ main .form button:hover {
     background: var(--form-button-background-hover-color);
 }
 
+main .form button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(229 0 115 / 18%);
+}
+
 main .submit-wrapper{
-    width: var(--form-submit-width);
+    /* width: var(--form-submit-width); */
+    grid-column: span 12;
+    justify-self: stretch;
+    display: flex;
+    justify-content: flex-end;
+}
+
+main .submit-wrapper > button {
+    display: block;
+    width: auto;
+    /* min-width: 140px; */
+    margin-left: auto;
 }
 
 main .form textarea:disabled,
@@ -573,19 +598,12 @@ main .form .button-wrapper button:hover {
 }
 
 main .form .button-wrapper button[disabled] {
-    cursor:auto
+    cursor: not-allowed;
+    opacity: 0.55;
 }
 
 main .form .button-wrapper button[disabled]:hover {
-    border: 3px solid var(--button-secondary-color);
-    color: var(--button-secondary-color);
-    background-color: transparent;
-}
-
-@media (width >= 600px) {
-    main .form button {
-        width: unset;
-    }
+    background: var(--form-button-background-color);
 }
 
 main form .panel-wrapper {
