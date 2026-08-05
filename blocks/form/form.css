@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Noto+Kufi+Arabic:wght@300;400;500&amp;family=Noto+Sans+JP:wght@300;400;500;700&amp;family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&amp;family=Noto+Sans+Hebrew:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&amp;display=swap');
 
+/* stylelint-disable no-descending-specificity */
+
 :root {
     --background-color-primary: #fff;
     --label-color: #323338;
@@ -9,6 +11,8 @@
     --button-secondary-color: #676879;
     --button-primary-hover-color: #0060b9;
     --border-radius-small: 4px;
+    --form-primary-text-color: #323338;
+    --form-secondary-text-color: #676879;
     --form-font-size-m: 22px;
     --form-font-size-s: 16px;
     --form-font-size-xs: 14px;
@@ -27,7 +31,7 @@
     --form-paragraph-color: var(--label-color);
     --form-paragraph-margin: 0 0 0.9rem;
     --form-paragraph-font-style: none;
-    --form-paragraph-font-size: var(--form-font-size-s);
+    --form-paragraph-font-size: var(--form-font-size-xs);
     --form-label-color: var(--label-color);
     --form-label-font-size: var(--form-font-size-s);
     --form-label-font-weight: 500;
@@ -57,6 +61,7 @@
     --form-shell-max-width: 640px;
     --form-shell-max-height: calc(100vh - 110px);
     --form-field-gap: 5px;
+    --form-font-family: Figtree, Roboto, "Noto Sans Hebrew", "Noto Kufi Arabic", "Noto Sans JP", sans-serif;
     
     /* Card styling variables */
     --form-card-border-color: #e0e0e0;
@@ -85,11 +90,11 @@ main .section > div:has(> .form-container) > .default-content-wrapper,
 main .section > div:has(> .form-container) > .default-content-wrapper :is(h1, h2, h3, h4, h5, h6, p),
 main .form,
 main .form :is(input, textarea, select, button, label, legend, p, .field-description) {
-    font-family: 'Figtree', Roboto, 'Noto Sans Hebrew', 'Noto Kufi Arabic', 'Noto Sans JP', sans-serif;
+    font-family: var(--form-font-family);
 }
 
 main .section > div:has(> .form-container) > .default-content-wrapper {
-    color: #fff;
+    color: var(--form-primary-text-color);
     margin-bottom: 20px;
 }
 
@@ -131,13 +136,52 @@ main .form-container {
     max-width: var(--form-shell-max-width);
     margin: 0 auto;
     background: white;
-    padding: 28px;
     border-radius: 16px;
     box-shadow: 0 12px 30px rgb(0 0 0 / 12%);
     max-height: var(--form-shell-max-height);
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden auto;
     overscroll-behavior: contain;
+}
+
+main .form-container .form-wrapper {
+    padding: 0;
+}
+
+main .form-container .default-content-wrapper, main .form-container .form-wrapper form {
+    padding: 48px 48px 0 48px;
+}
+
+main .form-container .default-content-wrapper img {
+    height: 40px;
+}
+
+main .form-container .default-content-wrapper p:has(img),
+main .form-container .default-content-wrapper > h1,
+main .form-container .default-content-wrapper > h2,
+main .form-container .default-content-wrapper > h3,
+main .form-container .default-content-wrapper > h4,
+main .form-container .default-content-wrapper > h5,
+main .form-container .default-content-wrapper > h6 {
+    margin: 0;
+    font-family: var(--form-font-family);
+}
+
+main .form-container .default-content-wrapper h1.is-sticky,
+main .form-container .default-content-wrapper h2.is-sticky,
+main .form-container .default-content-wrapper h3.is-sticky,
+main .form-container .default-content-wrapper h4.is-sticky,
+main .form-container .default-content-wrapper h5.is-sticky,
+main .form-container .default-content-wrapper h6.is-sticky {
+    font-size: 20px;
+    padding: 10px 0;
+    margin: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+main .form-container .default-content-wrapper p {
+    font-size: var(--form-paragraph-font-size);
+    font-family: var(--form-font-family);
+    color: var(--form-secondary-text-color);
 }
 
 main .form {
@@ -509,7 +553,6 @@ main .submit-wrapper{
 main .submit-wrapper > button {
     display: block;
     width: auto;
-    /* min-width: 140px; */
     margin-left: auto;
 }
 
@@ -754,10 +797,6 @@ main .form form .checkbox-group-wrapper.horizontal .field-description {
     margin-top: 0.5rem;
 }
 
-main div.form-wrapper, main div.form-container .default-content-wrapper {
-    padding: 0;
-}
-
 /* Responsive adjustments for mobile */
 @media (width <= 599px) {
     :root {
@@ -775,4 +814,17 @@ main div.form-wrapper, main div.form-container .default-content-wrapper {
 /* Expand height for multi-select dropdowns (array types) */
 main .form form select[multiple] {
     height: calc(42px + 50px);
+}
+
+main .form .sticky-submit-button-wrapper {
+    padding: 16px;
+    border-top: 1px solid var(--border-color);
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+    backdrop-filter: blur(16px);
+}
+
+main .form .sticky-submit-button-wrapper button {
+    margin: 0;
 }

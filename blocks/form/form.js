@@ -566,7 +566,18 @@ export async function renderForm(formDef, element) {
   return { form, afbForm };
 }
 
+function getFormId(block) {
+  const [formHrefDiv, formIdDiv] = block.children;
+  if (formIdDiv && formIdDiv.querySelector('p')) {
+    const id = formIdDiv.querySelector('p').textContent.trim();
+    formIdDiv.remove();
+    return id;
+  }
+  return '';
+}
+
 export default async function decorate(block) {
+  const formId = getFormId(block);
   let container = block.querySelector('a[href]');
   let formDef;
   let pathname;
@@ -584,7 +595,16 @@ export default async function decorate(block) {
       block,
       editMode: block.classList.contains('edit-mode'),
     }));
+    form.id = formId || formDef.id || '';
     container.replaceWith(form);
+    if (block.classList.contains('sticky-submit-button')) {
+      const submitButtonWrapper = form.querySelector('.field-wrapper.submit-wrapper');
+      if (submitButtonWrapper) {
+        submitButtonWrapper.classList.add('sticky-submit-button-wrapper');
+        submitButtonWrapper.querySelector('button[type="submit"]').setAttribute('form', form.id);
+        form.parentElement.appendChild(submitButtonWrapper);
+      }
+    }
   }
   return { form, afbForm };
 }
