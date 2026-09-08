@@ -1,0 +1,86 @@
+name: QA Tests
+
+on:
+  workflow_run:
+    workflows: ["Build"]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  qa-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - run: npm ci
+
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+
+      - name: Check Disk Usage
+        run: |
+          echo "Disk usage:"
+          df -h
+          echo "Current directory size:"
+          du -sh .
+          echo "node_modules size:"
+          du -sh node_modules/ || echo "node_modules not yet created"
+
+      - name: Generate Playwright scripts with LLM
+        run: node run-agents-selfhealing.js
+
+      - name: Run Functional Tests
+        if: always()
+        run: npx playwright test tests/agent-generated.spec.js tests/accessability.spec.js
+      - name: Debug Archiver
+        run: |
+          npm install archiver
+          node -e "const a = require('archiver'); console.log(typeof a, Object.keys(a))"
+
+      - name: Send Test Report via Gmail
+        if: always()
+        run: |
+          npm install nodemailer
+          node send-email-gmail.js
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+
+      - name: Upload Automation Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: automation-scripts
+          path: |
+            ./specs/automated-plan.md
+            ./tests/agent-generated.spec.js
+            ./accessibility/
+
+      - name: Upload Test Results JSON
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-json
+          path: test-results.json
+
+      - name: Create Jira defects for failed tests
+        if: always()
+        env:
+          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+          JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+        run: node helper/create-jira-defects-from-results.js test-results.json

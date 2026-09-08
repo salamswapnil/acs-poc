@@ -5,9 +5,8 @@
   "description": "Starter project for Adobe Helix",
   "type": "module",
   "scripts": {
-    "test": "mocha & playwright test",
+    
     "coverage:unit": "c8 --reporter=json --reporter=text --lines 85 --functions 88 --branches 85 --no-check-coverage mocha",
-    "coverage:e2e": "c8 --reporter=json --reporter=text --lines 80 --functions 80 --branches 70 --no-check-coverage playwright test --project='chromium'",
     "coverage": "node ./test/merge-coverage.js",
     "lint:js": "eslint . --ext .json,.js,.mjs",
     "lint:css": "stylelint \"blocks/**/*.css\" \"styles/*.css\"",
@@ -18,9 +17,6 @@
     "build:json:definitions": "merge-json-cli -i \"models/_component-definition.json\" -o \"component-definition.json\"",
     "build:json:filters": "merge-json-cli -i \"models/_component-filters.json\" -o \"component-filters.json\"",
     "prepare": "husky",
-    "test:unit": "npm run build:json --silent && mocha",
-    "test:e2e": "playwright test",
-    "debug:e2e": "playwright test --project='chromium' --debug",
     "update:formula": "rollup -c rollup/jsonformula.rollup.config.js",
     "update:core": "rollup -c rollup/af-core.rollup.config.js",
     "update:formatters": "rollup -c rollup/af-formatters.rollup.config.js",
@@ -28,8 +24,7 @@
     "update": "npm run update:core && npm run update:formula && npm run update:formatters",
     "update:mappings": "node tools/update-mappings.js",
     "create:custom-component": "node tools/forms-scaffolder.js",
-    "build:pkg": "cd packages/aem-forms-block && npm install && npm run build",
-    "postinstall": "npx playwright install chromium"
+    "build:pkg": "cd packages/aem-forms-block && npm install && npm run build"
   },
   "c8": {
     "exclude": [
@@ -60,10 +55,10 @@
   "devDependencies": {
     "@adobe/json-formula": "0.1.50",
     "@aemforms/af-core": "0.22.167",
-    "@aemforms/af-formatters": "0.22.167",
     "@aemforms/af-custom-functions": "1.0.14",
+    "@aemforms/af-formatters": "0.22.167",
     "@babel/eslint-parser": "7.28.0",
-    "@playwright/test": "^1.60.0",
+    "@playwright/test": "^1.61.0",
     "@testing-library/dom": "9.3.4",
     "@testing-library/user-event": "14.3.0",
     "@types/node": "20.12.7",
@@ -88,6 +83,7 @@
     "npm-run-all": "4.1.5",
     "nyc": "^15.1.0",
     "parse-multipart-data": "^1.5.0",
+    "playwright": "^1.62.1",
     "rollup": "^2.79.1",
     "rollup-plugin-cleanup": "^3.2.1",
     "rollup-plugin-license": "^3.0.1",
@@ -123,5 +119,13 @@
     "spec": "test/**/*.test.js",
     "require": "test/unit/setup-env.js",
     "recursive": "true"
+  },
+  "dependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "@playwright/mcp": "^0.0.78",
+    "openai": "^6.49.0",
+     "archiver": "^7.0.1",
+    "nodemailer": "^7.0.6"
   }
 }

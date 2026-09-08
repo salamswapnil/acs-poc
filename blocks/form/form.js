@@ -123,7 +123,7 @@ function createImage(fd) {
   const field = createFieldWrapper(fd);
   field.id = fd?.id;
   const imagePath = fd.value || fd.properties['fd:repoPath'] || '';
-  const altText = fd.altText || fd.name;
+  const altText = '';
   field.append(createOptimizedPicture(imagePath, altText));
   return field;
 }
@@ -214,10 +214,10 @@ function inputDecorator(field, element) {
       input.multiple = field.type === 'file[]';
     }
     if (field.required) {
-      input.setAttribute('required', 'required');
+      input.setAttribute('required', '');
     }
     if (field.description) {
-      input.setAttribute('aria-describedby', `${field.id}-description`);
+      input.removeAttribute('aria-describedby');
     }
     if (field.minItems) {
       input.dataset.minItems = field.minItems;
@@ -567,6 +567,7 @@ export async function renderForm(formDef, element) {
 }
 
 function getFormId(block) {
+  /* eslint-disable-next-line no-unused-vars */
   const [formHrefDiv, formIdDiv] = block.children;
   if (formIdDiv && formIdDiv.querySelector('p')) {
     const id = formIdDiv.querySelector('p').textContent.trim();

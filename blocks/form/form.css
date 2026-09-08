@@ -59,9 +59,10 @@
     --form-submit-width: 100%;
     --form-width: 100%;
     --form-shell-max-width: 640px;
-    --form-shell-max-height: calc(100vh - 110px);
+    --form-shell-max-height: calc(100vh - 64px);
     --form-field-gap: 5px;
-    --form-font-family: Figtree, Roboto, "Noto Sans Hebrew", "Noto Kufi Arabic", "Noto Sans JP", sans-serif;
+    --form-font-family: figtree, roboto, "Noto Sans Hebrew", "Noto Kufi Arabic", "Noto Sans JP", sans-serif;
+    --form-border-radius: 16px;
     
     /* Card styling variables */
     --form-card-border-color: #e0e0e0;
@@ -148,7 +149,7 @@ main .form-container .form-wrapper {
 }
 
 main .form-container .default-content-wrapper, main .form-container .form-wrapper form {
-    padding: 48px 48px 0 48px;
+    padding: 48px 48px 0;
 }
 
 main .form-container .default-content-wrapper img {
@@ -175,7 +176,7 @@ main .form-container .default-content-wrapper h6.is-sticky {
     font-size: 20px;
     padding: 10px 0;
     margin: 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
 }
 
 main .form-container .default-content-wrapper p {

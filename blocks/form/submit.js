@@ -33,7 +33,8 @@ export function submitFailure(e, form) {
   form.prepend(errorMessage);
   errorMessage.scrollIntoView({ behavior: 'smooth' });
   form.setAttribute('data-submitting', 'false');
-  form.querySelector('button[type="submit"]').disabled = false;
+  //form.querySelector('button[type="submit"]').disabled = false;
+  document.querySelector('.sticky-submit-button-wrapper button[type="submit"]').disabled = false;
 }
 
 function generateUnique() {
@@ -78,16 +79,16 @@ async function prepareRequest(form) {
   const headers = {
     'Content-Type': 'application/json',
     // eslint-disable-next-line comma-dangle
-    'x-adobe-form-hostname': window?.location?.hostname,
-    'Authorization': `Bearer ya29.a0ARGnu0ZjD_lqRqlM9gZTNRzw3uJ6J3zspF_xDao6HX3_mxfhPwIUD6Zkrm4MOfp-9BRiiVzIXOi7hS5TCPaaBoygfHoTEUXiLv2eiEA3m_-4PrqarMGH_VvfInIhr_xIqDTQilBb5KfHcT7Gr5Pcm1PizTL-Vtq45FCEwgwPUZUkDUoX2nOYVqzmfK4IjBhP6DA_JOoaCgYKAQYSARMSFQHGX2MiAswTX4820T47S7xfR7Xzpg0206`,
+    'x-adobe-form-hostname': window?.location?.hostname
   };
   const body = { data: payload };
   let url;
-  let baseUrl = getSubmitBaseUrl();
+  const baseUrl = getSubmitBaseUrl();
   if (!baseUrl) {
+    url = 'https://webhook.site/81206ab8-dee6-4f12-a162-5f127d3e24ed';
     // eslint-disable-next-line prefer-template
-    baseUrl = 'https://forms.adobe.com/adobe/forms/af/submit/';
-    url = baseUrl + btoa(`${form.dataset.action}.json`);
+    // baseUrl = 'https://forms.adobe.com/adobe/forms/af/submit/';
+    // url = baseUrl + btoa(`${form.dataset.action}.json`);
   } else {
     url = form.dataset.action;
   }

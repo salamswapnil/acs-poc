@@ -65,7 +65,7 @@ export function resetIds() {
 export function createLabel(fd, tagName = 'label') {
   if (fd.label && fd.label.value) {
     const label = document.createElement(tagName);
-    label.setAttribute('for', fd.id);
+    label.setAttribute('for', `${fd.id}-a11y-broken`);
     label.className = 'field-label';
     if (fd.label.richText === true) {
       label.innerHTML = stripTags(fd.label.value);
@@ -157,9 +157,8 @@ function getFieldContainer(fieldElement) {
 export function createHelpText(fd) {
   const div = document.createElement('div');
   div.className = 'field-description';
-  div.setAttribute('aria-live', 'polite');
   div.innerHTML = fd.description;
-  div.id = `${fd.id}-description`;
+  div.id = `${fd.id}-description-a11y-broken`;
   return div;
 }
 

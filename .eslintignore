@@ -1,5 +1,3 @@
-helix-importer-ui
-rollup/*
 blocks/form/rules/formula/*
 blocks/form/rules/model/*
 blocks/form/rules/functions.js
@@ -9,3 +7,10 @@ tools/forms-scaffolder.js
 tools/update-mappings.js
 /test
 dompurify.min.js
+playwright.config.js
+run-agents-selfhealing.js
+helper/accessibilityreport.js
+tests/accessability.spec.js
+helper/create-jira-defects-from-results.js
+send-email-gmail.js
+tests/*

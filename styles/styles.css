@@ -112,12 +112,35 @@ h6 {
   scroll-margin: 40px;
 }
 
-h1 { font-size: var(--heading-font-size-xxl); line-height: 42px; }
-h2 { font-size: var(--heading-font-size-xl); line-height: 32px; }
-h3 { font-size: var(--heading-font-size-l); line-height: 32px; }
-h4 { font-size: var(--heading-font-size-m); line-height: 24px; }
-h5 { font-size: var(--heading-font-size-s); line-height: 24px; }
-h6 { font-size: var(--heading-font-size-xs); line-height: 18px; }
+h1 {
+  font-size: var(--heading-font-size-xxl);
+  line-height: 42px;
+}
+
+h2 {
+  font-size: var(--heading-font-size-xl);
+  line-height: 32px;
+}
+
+h3 {
+  font-size: var(--heading-font-size-l);
+  line-height: 32px;
+}
+
+h4 {
+  font-size: var(--heading-font-size-m);
+  line-height: 24px;
+}
+
+h5 {
+  font-size: var(--heading-font-size-s);
+  line-height: 24px;
+}
+
+h6 {
+  font-size: var(--heading-font-size-xs);
+  line-height: 18px;
+}
 
 p,
 dl,
