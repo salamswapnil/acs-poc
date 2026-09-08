@@ -33,7 +33,7 @@ export function submitFailure(e, form) {
   form.prepend(errorMessage);
   errorMessage.scrollIntoView({ behavior: 'smooth' });
   form.setAttribute('data-submitting', 'false');
-  //form.querySelector('button[type="submit"]').disabled = false;
+  // form.querySelector('button[type="submit"]').disabled = false;
   document.querySelector('.sticky-submit-button-wrapper button[type="submit"]').disabled = false;
 }
 
